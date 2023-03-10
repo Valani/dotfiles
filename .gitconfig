@@ -1,0 +1,9 @@
+[user]
+	name = Valani
+	email = cas23473@gmail.com
+[core]
+	editor = nvim
+[init]
+	defaultBranch = master
+[credential]
+	helper = cache --timeout=86400

@@ -1,0 +1,34 @@
+{
+	"workbench.startupEditor": "newUntitledFile",
+	"terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
+	"workbench.statusBar.feedback.visible": false,
+	"workbench.statusBar.visible": false,
+	"window.menuBarVisibility": "toggle",
+	"workbench.activityBar.visible": false,
+	"editor.minimap.enabled": false,
+	"files.defaultLanguage": "html",
+	"editor.fontSize": 16,
+	"editor.tabSize": 2,
+	"workbench.editor.tabSizing": "shrink",
+	"editor.detectIndentation": false,
+	"editor.insertSpaces": false,
+	"editor.glyphMargin": false,
+	"editor.smoothScrolling": true,
+	
+	"workbench.iconTheme": "vscode-icons",
+	"workbench.editor.enablePreview": false,
+	"workbench.editorAssociations": [
+		{
+			"viewType": "jupyter.notebook.ipynb",
+			"filenamePattern": "*.ipynb"
+		}
+	],
+	"mssql.connections": [
+		{
+			"server": "{{put-server-name-here}}",
+			"database": "{{put-database-name-here}}",
+			"user": "{{put-username-here}}",
+			"password": "{{put-password-here}}"
+		}
+	],
+}
