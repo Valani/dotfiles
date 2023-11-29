@@ -1,11 +1,16 @@
+memo = {}
+
 def lis_ending_at(arr, i):
   if i == 0:
     return 1
+  if i in memo:
+    return memo[i]
   max_len = 1
   for j in range(i):
     if arr[j] < arr[i]:
       len_j = lis_ending_at(arr, j)
       max_len = max(max_len, len_j + 1)
+  memo[i] = max_len
   return max_len
 
 def lis(arr):
