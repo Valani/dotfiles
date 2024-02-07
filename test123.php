@@ -104,52 +104,12 @@ function checkIsBot()
     return false;
 }
 
-$staticCache = md5($url).'.html';
-
-if(file_exists('htmlCache/'.$staticCache) && checkIsBot()){
-    if(time() < (filectime('htmlCache/'.$staticCache) + 60)){
-        $out = file_get_contents('htmlCache/'.$staticCache);
-
-        $out = str_replace('http:','https:',$out);
-        $out = str_replace('<head>','<head><link rel="canonical" href="https://nawiteh.com.ua'.$_SERVER['REQUEST_URI'].'"/>',$out);
-        $content_clean = str_replace('.png','_minimized.webp',$out);
-        $content_clean = str_replace('.jpg','_minimized.webp',$content_clean);
-        $content_clean = str_replace('.jpeg','_minimized.webp',$content_clean);
-        $content_clean = str_replace('.PNG','_minimized.webp',$content_clean);
-        $content_clean = str_replace('.JPG','_minimized.webp',$content_clean);
-
-        $content_clean = preg_replace("/\<script.*?\<\/script\>/", "", $content_clean);
-        $content_clean = str_replace('.js','',$content_clean);
-        $content_clean = str_replace('.css','_minimized.css',$content_clean);
-        $content_clean = str_replace('<img','<img loading="lazy"',$content_clean);
-
-        $content_clean = str_replace('magiczoomplus.module_minimized.css','',$content_clean);
-        $content_clean = str_replace('magiczoomplus_minimized.css','',$content_clean);
-        $content_clean = str_replace('magiczoomplus','',$content_clean);
-        $content_clean = str_replace('<link type="text/css" href="/modules//views/css/" rel="stylesheet" media="screen" />','',$content_clean);
-        $content_clean = str_replace('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/css/jquery.fancybox.min_minimized.css" integrity="sha512-3IQL+PcFRQuSVCbyYeiT3jtO7Hwes+JU2JO0SlEBKwfyYr/aGRqLk72UTolR0opyvnDAiOTnG7u2Jyl5bri9tQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />','',$content_clean);
-        $out = $content_clean;
-
-        echo $out;
-        die;
-    }else{
-        unlink('htmlCache/'.$staticCache);
-    }
-}
 ob_start();
 require dirname(__FILE__).'/config/config.inc.php';
 Dispatcher::getInstance()->dispatch();
 $out = ob_get_contents();
 ob_end_clean();
 
-if(checkIsBot()){
-    $content = $out;
-
-    file_put_contents('htmlCache/'.$staticCache,$content,FILE_APPEND);
-
-    echo $content;
-    die;
-}
 $out = str_replace('http:','https:',$out);
 $out = str_replace('<head>','<head><link rel="canonical" href="https://nawiteh.com.ua'.$_SERVER['REQUEST_URI'].'"/>',$out);
 $content_clean = str_replace('.png','.webp',$out);
@@ -395,7 +355,7 @@ foreach($noindex_rules as $item){
 if($set_noindex){
         $content_clean = str_replace('<head>','
     <head>
-        <meta name="robots" content="NOINDEX">
+        <meta name="robots" content="noindex">
 ', $content_clean);
 }
 
